@@ -1,0 +1,40 @@
+name: Run Spring Boot API
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-spring-api:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the code
+    - name: Check out repository
+      uses: actions/checkout@v3
+
+    # Step 2: Set up JDK
+    - name: Set up JDK
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # Step 3: Cache Maven dependencies (optional, for faster builds)
+    - name: Cache Maven dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
+
+    # Step 4: Build the project
+    - name: Build with Maven
+      run: mvn clean install
+
+    # Step 5: Run the Spring Boot application
+    - name: Run Spring Boot
+      run: mvn spring-boot:run
