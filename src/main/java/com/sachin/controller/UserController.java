@@ -28,7 +28,7 @@ import com.sachin.service.CustomUserDetailsService;
 
 import jakarta.validation.Valid;
 
-@RequestMapping("/api")
+//@RequestMapping("/api")
 @CrossOrigin(origins = "*")
 @RestController
 @Validated

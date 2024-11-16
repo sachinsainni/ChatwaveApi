@@ -60,7 +60,7 @@ public class AppConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)  // Disable CSRF
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/login", "/api/register", "/api/chat").permitAll()  // Allow unauthenticated access to specific endpoints
+                .requestMatchers("/login", "/register", "/chat").permitAll()  // Allow unauthenticated access to specific endpoints
                 .anyRequest().authenticated()  // All other endpoints require authentication
             )
             .exceptionHandling(exceptions -> exceptions
